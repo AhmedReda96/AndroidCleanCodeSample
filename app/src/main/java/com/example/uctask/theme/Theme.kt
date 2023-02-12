@@ -1,4 +1,4 @@
-package com.example.uctask.ui.theme
+package com.example.uctask.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

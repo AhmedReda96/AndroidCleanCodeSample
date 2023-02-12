@@ -1,4 +1,4 @@
-package com.example.uctask.ui.theme
+package com.example.uctask.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
