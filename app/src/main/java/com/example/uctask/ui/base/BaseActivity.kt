@@ -1,13 +1,11 @@
 package com.example.uctask.ui.base
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
@@ -20,7 +18,7 @@ import com.example.domain.model.pokemonItemModel.PokemonItemModel
 import com.example.domain.model.pokemonItemModel.PokemonRequest
 import com.example.presentation.viewModel.PokemonListVM
 import com.example.uctask.theme.UCTaskTheme
-import com.example.uctask.theme.widget.LinearProgressIndicator
+import com.example.uctask.theme.widget.NormalText
 import com.example.uctask.ui.routes.DetailsRoute
 import com.example.uctask.ui.routes.HomeRoute
 import dagger.hilt.android.AndroidEntryPoint
@@ -63,6 +61,7 @@ class BaseActivity : ComponentActivity() {
 
                     is NetworkingViewState.Error -> {
                         try {
+                            Log.d("TAG", "handleResponse: ${viewState.error.printStackTrace()}")
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
@@ -79,9 +78,18 @@ class BaseActivity : ComponentActivity() {
 
     @Suppress("UNCHECKED_CAST")
     private fun handleResponse(response: ApiResponse<*>) {
-
+        // PopulateUI()
         val result = response.data as List<PokemonItemModel>
         Log.d("TAG", "handleResponse: ${result.size}")
         Log.d("TAG", "handleResponse: ${response.request}")
+    }
+
+    @Composable
+    private fun PopulateUI() {
+        LazyColumn {
+            items(500) {
+                NormalText(it.toString())
+            }
+        }
     }
 }
