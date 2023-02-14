@@ -20,6 +20,7 @@ import com.example.domain.model.pokemonItemModel.PokemonItemModel
 import com.example.domain.model.pokemonItemModel.PokemonRequest
 import com.example.presentation.viewModel.PokemonListVM
 import com.example.uctask.theme.UCTaskTheme
+import com.example.uctask.theme.widget.LinearProgressIndicator
 import com.example.uctask.ui.routes.DetailsRoute
 import com.example.uctask.ui.routes.HomeRoute
 import dagger.hilt.android.AndroidEntryPoint
@@ -78,6 +79,7 @@ class BaseActivity : ComponentActivity() {
 
     @Suppress("UNCHECKED_CAST")
     private fun handleResponse(response: ApiResponse<*>) {
+
         val result = response.data as List<PokemonItemModel>
         Log.d("TAG", "handleResponse: ${result.size}")
         Log.d("TAG", "handleResponse: ${response.request}")
