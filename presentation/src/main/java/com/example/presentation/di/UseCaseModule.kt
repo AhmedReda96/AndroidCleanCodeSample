@@ -1,4 +1,4 @@
-package com.example.data.di
+package com.example.presentation.di
 
 import com.example.domain.repository.BaseRepository
 import com.example.domain.useCase.BaseUseCase

@@ -6,7 +6,5 @@ import com.example.domain.model.pokemonItemModel.PokemonItemModel
 import com.example.domain.repository.BaseRepository
 
 class RepositoryImpl constructor(private val apiService: ApiService) : BaseRepository {
-    override suspend fun getPokemonList(): ApiResponse<PokemonItemModel> {
-        return apiService.getPokemon()
-    }
+    override suspend fun getPokemonList() = apiService.getPokemon()
 }

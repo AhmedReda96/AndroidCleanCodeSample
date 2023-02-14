@@ -4,5 +4,5 @@ import com.example.domain.model.baseResponse.ApiResponse
 import com.example.domain.model.pokemonItemModel.PokemonItemModel
 
 interface BaseRepository {
-    suspend fun getPokemonList(): ApiResponse<PokemonItemModel>
+    suspend fun getPokemonList(): ApiResponse<List<PokemonItemModel>>
 }

@@ -1,12 +1,14 @@
-package com.example.data.di
+package com.example.presentation.di
 
-import com.example.data.BuildConfig
+import android.util.Log
 import com.example.data.apiService.ApiService
+import com.example.presentation.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -22,7 +24,18 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHTTPClient(): OkHttpClient {
-        return OkHttpClient.Builder().connectTimeout(15, TimeUnit.SECONDS)
+        val loggingInterceptor = HttpLoggingInterceptor { message ->
+            Log.v(
+                "logger",
+                "log $message"
+            )
+        }
+
+        loggingInterceptor.setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)
+
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(15, TimeUnit.SECONDS)
             .readTimeout(15, TimeUnit.SECONDS).build()
     }
 
