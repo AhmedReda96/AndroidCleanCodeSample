@@ -21,11 +21,12 @@ import com.example.uctask.theme.UCTaskTheme
 import com.example.uctask.theme.widget.NormalText
 import com.example.uctask.ui.routes.DetailsRoute
 import com.example.uctask.ui.routes.HomeRoute
+import com.example.uctask.utils.showLog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class BaseActivity : ComponentActivity() {
+class BaseActivity : BaseViewActivity() {
     private val viewModel: PokemonListVM by viewModels()
     private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,34 +55,19 @@ class BaseActivity : ComponentActivity() {
     private fun initVars() {
         viewModel.getPokemon(PokemonRequest())
         lifecycleScope.launch {
-            viewModel.pokemonListLD.collect { viewState ->
-                when (viewState) {
-                    is NetworkingViewState.Loading -> {
-                    }
-
-                    is NetworkingViewState.Error -> {
-                        try {
-                            Log.d("TAG", "handleResponse: ${viewState.error.printStackTrace()}")
-                        } catch (e: Exception) {
-                            e.printStackTrace()
-                        }
-                    }
-
-                    is NetworkingViewState.Success<*> -> {
-                        (viewState.item as ApiResponse<*>).request = viewState.request
-                        handleResponse(viewState.item as ApiResponse<*>)
-                    }
-                }
-            }
+            viewModel.pokemonListLD.collect { viewState -> handleUI(viewState) }
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun handleResponse(response: ApiResponse<*>) {
-        // PopulateUI()
-        val result = response.data as List<PokemonItemModel>
-        Log.d("TAG", "handleResponse: ${result.size}")
-        Log.d("TAG", "handleResponse: ${response.request}")
+    override fun handleResponse(response: ApiResponse<*>) {
+        when (response.request) {
+            is PokemonRequest -> {
+                val result = response.data as List<PokemonItemModel>
+                showLog("${result.size}")
+            }
+        }
+
     }
 
     @Composable
@@ -92,4 +78,6 @@ class BaseActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
