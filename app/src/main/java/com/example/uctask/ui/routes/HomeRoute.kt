@@ -19,6 +19,7 @@ import com.example.presentation.viewModel.PokemonListVM
 import com.example.uctask.theme.UCTaskTheme
 import com.example.uctask.ui.base.BaseRoutes
 import com.example.uctask.ui.base.BaseViewActivity
+import com.example.uctask.utils.getImageUrl
 import com.example.uctask.utils.showLog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +29,6 @@ open class HomeRoute constructor(
     private val viewModel: PokemonListVM
 ) : BaseViewActivity() {
     private val pokemonList = mutableStateListOf<PokemonItemModel>()
-
 
     @Composable
     open fun HomeRouteUI() {
@@ -75,7 +75,7 @@ open class HomeRoute constructor(
                 navHostController.navigate(route = BaseRoutes.DetailsRoute.route)
             }) {
                 Image(
-                    painter = rememberAsyncImagePainter(pokemonItemModel.url),
+                    painter = rememberAsyncImagePainter(getImageUrl(pokemonItemModel.url)),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()

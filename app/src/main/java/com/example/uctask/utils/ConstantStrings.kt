@@ -7,5 +7,6 @@ object ConstantStrings {
     const val ERROR: String = "ERROR"
     const val UNKNOWN_VIEW_STATE: String = "Unknown view state"
     const val SHOW_LOG: String = "showLog"
+    const val IMAGE_URL: String = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
 
 }
