@@ -25,9 +25,10 @@ object NetworkModule {
     @Singleton
     fun provideOkHTTPClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor { message ->
+
             Log.v(
-                "logger",
-                "log $message"
+                "log",
+                "showLog $message"
             )
         }
 

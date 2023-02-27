@@ -1,41 +1,36 @@
 package com.example.uctask.ui.base
 
-import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
 import com.example.domain.model.baseResponse.ApiResponse
 import com.example.domain.model.baseViewState.NetworkingViewState
-import com.example.uctask.R
+import com.example.uctask.utils.ConstantStrings
 import com.example.uctask.utils.showLog
 
 open class BaseViewActivity : ComponentActivity() {
-    protected open fun handleUI(viewState: NetworkingViewState?) {
-
+    @Composable
+    protected open fun HandleUI(viewState: NetworkingViewState?) {
         when (viewState) {
-
             is NetworkingViewState.Loading -> {
                 showLoader()
             }
-
-            is NetworkingViewState.Error -> {
+            is NetworkingViewState.Error -> with(viewState) {
                 try {
-                    Log.d("TAG", "handleResponse: ${viewState.error.printStackTrace()}")
+                    showLog(true, error.message.toString())
                 } catch (e: Exception) {
-                    e.printStackTrace()
+                    showLog(true, e.message.toString())
                 }
+                dismissLoader()
             }
 
-            is NetworkingViewState.Success<*> -> {
-                when (viewState.item) {
-                    is ApiResponse<*> -> {
-                        (viewState.item as ApiResponse<*>).request = viewState.request
-                        handleResponse(viewState)
-                    }
-                    else -> showFailureMessage(getString(R.string.message_server_error))
-
-                }
+            is NetworkingViewState.Success<*> -> with(viewState) {
+                (item as ApiResponse<*>).request = request
+                HandleResponse(item as ApiResponse<*>)
+                dismissLoader()
             }
-            else -> throw IllegalArgumentException("Unknown view state ${viewState?.javaClass?.simpleName}")
-
+            else -> with(ConstantStrings.UNKNOWN_VIEW_STATE + this.javaClass.simpleName) {
+                showLog(true, this)
+            }
         }
 
 
@@ -45,15 +40,14 @@ open class BaseViewActivity : ComponentActivity() {
         //show loader here
     }
 
-    private fun showFailureMessage(message: String) = showLog(message)
-
-
-    private fun handleResponse(viewState: NetworkingViewState.Success<*>) {
-        handleResponse(viewState.item as ApiResponse<*>)
+    private fun dismissLoader() {
+        //dismiss loader here
     }
 
+
+    @Composable
     @Suppress("UNCHECKED_CAST")
-    protected open fun handleResponse(response: ApiResponse<*>) {
+    protected open fun HandleResponse(response: ApiResponse<*>) {
     }
 
 

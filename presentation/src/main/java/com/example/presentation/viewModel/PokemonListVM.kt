@@ -16,15 +16,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PokemonListVM @Inject constructor(private val baseUseCase: BaseUseCase) : ViewModel() {
-    private var _pokemonListMLD =
+    private var _pokemonListMSF =
         MutableStateFlow<NetworkingViewState>(NetworkingViewState.Loading())
-    val pokemonListLD: StateFlow<NetworkingViewState> get() = _pokemonListMLD
+    val pokemonListSF: StateFlow<NetworkingViewState> get() = _pokemonListMSF
 
 
     fun getPokemon(scanSupplier: PokemonRequest) {
         viewModelScope.launch {
             try {
-                _pokemonListMLD.emit(
+                _pokemonListMSF.emit(
                     NetworkingViewState.Success(
                         scanSupplier,
                         baseUseCase.getPokemonList()
@@ -33,7 +33,7 @@ class PokemonListVM @Inject constructor(private val baseUseCase: BaseUseCase) : 
 
             } catch (e: Exception) {
                 e.printStackTrace()
-                _pokemonListMLD.emit(NetworkingViewState.Error(e))
+                _pokemonListMSF.emit(NetworkingViewState.Error(e))
             }
         }
     }
