@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\AReda\.android\avd\pdt_API_30.avd" />
+            <value value="C:\Users\AReda\.android\avd\samsung_a52_API_30.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-02-27T11:37:13.544399100Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-02-28T12:45:40.624757800Z" />
   </component>
 </project>

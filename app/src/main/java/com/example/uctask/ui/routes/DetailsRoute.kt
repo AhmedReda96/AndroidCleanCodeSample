@@ -18,11 +18,7 @@ import com.example.uctask.ui.base.BaseRoutes
 fun DetailsRoute(navController: NavHostController) {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Text(modifier = Modifier.clickable {
-            navController.navigate(route = BaseRoutes.HomeRoute.route) {
-                popUpTo(BaseRoutes.HomeRoute.route) {
-                    inclusive = true
-                }
-            }
+            navController.popBackStack()
         }, text = "Details Screen", fontSize = MaterialTheme.typography.h3.fontSize)
     }
 }

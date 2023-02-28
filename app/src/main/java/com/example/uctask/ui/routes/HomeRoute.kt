@@ -24,14 +24,14 @@ import com.example.uctask.utils.showLog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-open class HomeRoute constructor(
+class HomeRoute constructor(
     private val navHostController: NavHostController,
     private val viewModel: PokemonListVM
 ) : BaseViewActivity() {
     private val pokemonList = mutableStateListOf<PokemonItemModel>()
 
     @Composable
-    open fun HomeRouteUI() {
+    fun HomeRouteUI() {
         UCTaskTheme {
             InitVars(viewModel)
             PopulateUI()
@@ -40,8 +40,10 @@ open class HomeRoute constructor(
 
     @Composable
     private fun InitVars(viewModel: PokemonListVM) = with(rememberCoroutineScope()) {
-        viewModel.getPokemon(PokemonRequest())
-        HandleUI(viewState = viewModel.pokemonListSF.collectAsState().value)
+        if (pokemonList.isEmpty()) {
+            viewModel.getPokemon(PokemonRequest())
+            HandleUI(viewState = viewModel.pokemonListSF.collectAsState().value)
+        }
     }
 
     @Composable
