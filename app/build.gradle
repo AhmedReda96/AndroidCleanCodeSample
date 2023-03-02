@@ -11,11 +11,11 @@ android {
         includeInBundle = false
     }
 
-    namespace 'com.example.uctask'
+    namespace 'com.example.sample'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.uctask"
+        applicationId "com.ar.sample"
         minSdk 24
         targetSdk 33
         versionCode 1

@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'com.example.data'
+    namespace 'com.ar.data'
     compileSdk 33
 
     defaultConfig {
@@ -68,7 +68,6 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     // Life cycle
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'androidx.fragment:fragment-ktx:1.5.5'
 
 

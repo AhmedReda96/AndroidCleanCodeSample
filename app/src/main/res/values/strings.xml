@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UCTask</string>
+    <string name="app_name">CC Sample</string>
     <string name="message_server_error">Something went wrong, try again</string>
 
 </resources>
