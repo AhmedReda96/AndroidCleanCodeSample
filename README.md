@@ -1,4 +1,4 @@
-# AndroidCleanCodeSample
+Huawei# AndroidCleanCodeSample
 ### using Layers module , MVVM , Dagger-hilt , Kotlin , Coroutines , JetpackCompose , Navigation Compose 
 ________________________________________________________________________________________________________________________________________________________________________    
 # DEMO:
@@ -18,7 +18,7 @@ ________________________________________________________________________________
 
 - Presentation : Contains the ViewModel and DI.
 
-- Domain : Contains the business logic of the application. It is the individual and innermost module. It’s a complete java module.
+- Domain : Contains the business logic of the application. It is the individual and innermost module
 
 - Data : It includes the domain layer. It would implement the interface exposed by domain layer and dispenses data to app
 
